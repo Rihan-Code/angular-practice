@@ -1,0 +1,7 @@
+<!-- [] is used to pass the variables or parameters  -->
+<app-greeting [message]="homeMessage()" />
+
+<app-counter />
+
+<!-- '$' tells what actual listener is passed i.e. which key is pressed -->
+<input placeholder="Type something..." type="text" (keyup)="keyUpHandler($event)"> 
