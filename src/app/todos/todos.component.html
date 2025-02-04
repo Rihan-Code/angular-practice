@@ -1,11 +1,20 @@
 <h3>Todos List</h3>
 
+<!-- this method is used earlier -->
+<!-- <p *ngIf="!todoItems().length">Loading...</p> -->
+
+<!-- Following is done with latest update -->
+@if (!todoItems().length) {
+<p>Loading...</p>
+}
+
+<form action="">
+  <label>Filter Todos</label>
+  <input name="searchTerm" type="text" [(ngModel)]="searchTerm" placeholder="Search todos..." />
+</form>
+
 <ul class="todos">
-  @for (todo of todoItems(); track todo.id) {
-  <li class="todos__item">
-    <input id="todo-{{ todo.id }}" type="checkbox" [value]="todo.completed" />
-    <label for="todo-{{ todo.id }}">{{ todo.title }}</label>
-    <!--'for' helps for the input to be done on click on the title as well-->
-  </li>
+  @for (todo of todoItems() | filterTodos : searchTerm(); track todo.id) {
+  <app-todo-item (todoToggled)="updateTodoItem($event)" [todo]="todo" />
   }
 </ul>
